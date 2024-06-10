@@ -88,10 +88,8 @@ func NewMap(mapFilename string) (*RenderMap, error) {
 				renderTile.AddSprite(SpriteData{Image: spriteSheet.Ice, OffsetX: 0, OffsetY: 0})
 			}
 
-			if tileData.CityName != "" {
-				if tileData.HasCity {
-					renderTile.AddSprite(SpriteData{Image: spriteSheet.Village, OffsetX: 250, OffsetY: 0})
-				}
+			if tileData.ImprovementData != nil && tileData.ImprovementType == 1 {
+				renderTile.AddSprite(SpriteData{Image: spriteSheet.Village, OffsetX: 250, OffsetY: 0})
 			}
 
 			renderMap.Tiles[y][x] = renderTile
