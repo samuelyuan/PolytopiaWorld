@@ -88,8 +88,28 @@ func NewMap(mapFilename string) (*RenderMap, error) {
 				renderTile.AddSprite(SpriteData{Image: spriteSheet.Ice, OffsetX: 0, OffsetY: 0})
 			}
 
-			if tileData.ImprovementData != nil && tileData.ImprovementType == 1 {
-				renderTile.AddSprite(SpriteData{Image: spriteSheet.Village, OffsetX: 250, OffsetY: 0})
+			if tileData.ResourceExists {
+				if tileData.ResourceType == 2 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Crop, OffsetX: 50, OffsetY: -50})
+				} else if tileData.ResourceType == 3 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Fish, OffsetX: 0, OffsetY: 0})
+				} else if tileData.ResourceType == 6 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Fruits[tileData.Climate], OffsetX: 250, OffsetY: 150})
+				}
+			}
+
+			if tileData.ImprovementData != nil {
+				if tileData.ImprovementType == 1 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Village, OffsetX: 250, OffsetY: 0})
+				} else if tileData.ImprovementType == 2 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Ruin, OffsetX: -50, OffsetY: -450})
+				} else if tileData.ImprovementType == 5 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Farm, OffsetX: 100, OffsetY: 0})
+				} else if tileData.ImprovementType == 8 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Port, OffsetX: 75, OffsetY: 75})
+				} else if tileData.ImprovementType == 21 {
+					renderTile.AddSprite(SpriteData{Image: spriteSheet.Mine, OffsetX: 250, OffsetY: 50})
+				}
 			}
 
 			renderMap.Tiles[y][x] = renderTile

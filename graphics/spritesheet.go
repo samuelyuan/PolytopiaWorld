@@ -9,13 +9,25 @@ import (
 )
 
 type SpriteSheet struct {
+	// Terrain
 	Land      []*ebiten.Image
 	Mountains []*ebiten.Image
 	Forests   []*ebiten.Image
 	Water     []*ebiten.Image
 	Ocean     []*ebiten.Image
-	Village   *ebiten.Image
-	Ice       *ebiten.Image
+
+	// Resources
+	Crop   *ebiten.Image
+	Fish   *ebiten.Image
+	Fruits []*ebiten.Image
+
+	// Improvements
+	Village *ebiten.Image
+	Ruin    *ebiten.Image
+	Farm    *ebiten.Image
+	Port    *ebiten.Image
+	Mine    *ebiten.Image
+	Ice     *ebiten.Image
 }
 
 func loadImage(filename string) *ebiten.Image {
@@ -44,6 +56,13 @@ func LoadSpriteSheet() (*SpriteSheet, error) {
 		spriteSheet.Forests[i] = loadImage(fmt.Sprintf("images/Terrain/Forests/Forest_%v.png", i))
 	}
 
+	spriteSheet.Crop = loadImage("images/Common/crop.png")
+	spriteSheet.Fish = loadImage("images/Common/fish.png")
+	spriteSheet.Fruits = make([]*ebiten.Image, 17)
+	for i := 1; i <= 16; i++ {
+		spriteSheet.Fruits[i] = loadImage(fmt.Sprintf("images/Fruits/ResourceGFX_fruit_%v.png", i))
+	}
+
 	spriteSheet.Water = make([]*ebiten.Image, 4)
 	spriteSheet.Water[0] = loadImage("images/Terrain/Water/water.png")
 	spriteSheet.Water[1] = loadImage("images/Terrain/Water/water_wall_left.png")
@@ -56,7 +75,13 @@ func LoadSpriteSheet() (*SpriteSheet, error) {
 	spriteSheet.Ocean[2] = loadImage("images/Terrain/Water/ocean_wall_right.png")
 	spriteSheet.Ocean[3] = loadImage("images/Terrain/Water/ocean_wall_left_wall_right.png")
 
-	spriteSheet.Village = loadImage("images/village.png")
 	spriteSheet.Ice = loadImage("images/Terrain/Tiles/ice.png")
+
+	spriteSheet.Village = loadImage("images/Common/village.png")
+	spriteSheet.Ruin = loadImage("images/Common/ruin.png")
+	spriteSheet.Farm = loadImage("images/Common/farm.png")
+	spriteSheet.Port = loadImage("images/Common/port.png")
+	spriteSheet.Mine = loadImage("images/Common/mine.png")
+
 	return spriteSheet, nil
 }
