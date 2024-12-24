@@ -3,7 +3,7 @@ package graphics
 import (
 	"fmt"
 
-	"github.com/samuelyuan/PolytopiaWorld/fileio"
+	polytopiamapmodel "github.com/samuelyuan/polytopiamapmodelgo"
 )
 
 type RenderMap struct {
@@ -27,7 +27,7 @@ func (renderMap *RenderMap) Size() (width, height int) {
 }
 
 func NewMap(mapFilename string) (*RenderMap, error) {
-	saveData, err := fileio.ReadPolytopiaSaveFile(mapFilename)
+	saveData, err := polytopiamapmodel.ReadPolytopiaCompressedFile(mapFilename)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to load save state: %s", err)
 	}
